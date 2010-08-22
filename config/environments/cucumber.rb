@@ -1,72 +1,13 @@
-# Edit at your own peril - it's recommended to regenerate this file
-# in the future when you upgrade to a newer version of Cucumber.
+HOST = 'www.example.com'
 
-# IMPORTANT: Setting config.cache_classes to false is known to
-# break Cucumber's use_transactional_fixtures method.
-# For more information see https://rspec.lighthouseapp.com/projects/16211/tickets/165
-config.cache_classes = true
+CHANGECONST::Application.configure do
+  config.cache_classes               = true
+  config.whiny_nils                  = true
+  config.consider_all_requests_local = true
 
-# Log error messages when you accidentally call methods on nil.
-config.whiny_nils = true
-
-# Show full error reports and disable caching
-config.action_controller.consider_all_requests_local = true
-config.action_controller.perform_caching             = false
-
-# Disable request forgery protection in test environment
-config.action_controller.allow_forgery_protection    = false
-
-# Tell Action Mailer not to deliver emails to the real world.
-# The :test delivery method accumulates sent emails in the
-# ActionMailer::Base.deliveries array.
-config.action_mailer.delivery_method = :test
-
-config.gem 'factory_girl', 
-           :version => '>= 1.2.3'
-
-# Cucumber and dependencies
-config.gem 'cucumber-rails',   :lib => false, :version => '>=0.3.0' unless File.directory?(File.join(Rails.root, 'vendor/plugins/cucumber-rails'))
-config.gem 'database_cleaner', :lib => false, :version => '>=0.5.0' unless File.directory?(File.join(Rails.root, 'vendor/plugins/database_cleaner'))
-config.gem 'webrat',           :lib => false, :version => '>=0.7.0' unless File.directory?(File.join(Rails.root, 'vendor/plugins/webrat'))
-
-config.gem 'polyglot',
-           :version => '0.3.1',
-           :lib     => false
-config.gem 'treetop',
-           :version => '1.4.5',
-           :lib     => false
-config.gem 'term-ansicolor',
-           :version => '1.0.5',
-           :lib     => false
-config.gem 'diff-lcs',
-           :version => '1.1.2',
-           :lib     => false
-config.gem 'builder',
-           :version => '2.1.2',
-           :lib     => false
-
-# Webrat and dependencies
-# NOTE: don't vendor nokogiri - it's a binary Gem
-config.gem 'nokogiri',
-           :version => '>= 1.4.0',
-           :lib     => false
-
-HOST = 'localhost'
-
-class RackRailsCookieHeaderHack
-  def initialize(app)
-    @app = app
-  end
-
-  def call(env)
-    status, headers, body = @app.call(env)
-    if headers['Set-Cookie'] && headers['Set-Cookie'].respond_to?(:collect!)
-      headers['Set-Cookie'].collect! { |h| h.strip }
-    end
-    [status, headers, body]
-  end
-end
-
-config.after_initialize do
-  ActionController::Dispatcher.middleware.insert_before(ActionController::Base.session_store, RackRailsCookieHeaderHack)
+  config.action_controller.perform_caching          = false
+  config.action_dispatch.show_exceptions            = false
+  config.action_controller.allow_forgery_protection = false
+  config.active_support.deprecation                 = :stderr
+  config.action_mailer.delivery_method              = :test
 end
