@@ -44,10 +44,10 @@ run("mkdir #{project_directory}")
 Dir.chdir(project_directory) or fail("Couldn't change to #{project_directory}")
 run("git init")
 run("git remote add local-suspenders #{local_url}")
-run("git pull local-suspenders master")
+run("git pull local-suspenders rails3")
 run("git remote rm local-suspenders")
 run("git remote add suspenders #{template_url}")
-run("git pull suspenders master")
+run("git pull suspenders rails3")
 
 Dir.glob("#{project_directory}/**/*").each do |file|
   search_and_replace(file, changeme, project_name)
