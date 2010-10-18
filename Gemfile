@@ -7,9 +7,9 @@ gem "clearance",         "0.9.0.rc7"
 gem "haml",              "3.0.17"
 gem "high_voltage",      "0.9.1"
 gem "hoptoad_notifier",  "2.2.0"
-gem "RedCloth",          "4.2.3", :require => "redcloth"
 gem "paperclip",         "2.3.3"
 gem "will_paginate",     "3.0.pre2"
+gem "heroku"
 
 gem "formtastic", :git => "git://github.com/justinfrench/formtastic.git", :branch => "rails3"
 
