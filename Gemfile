@@ -13,7 +13,8 @@ gem "will_paginate",     "3.0.pre2"
 
 gem "formtastic", :git => "git://github.com/justinfrench/formtastic.git", :branch => "rails3"
 
-gem "pg", "0.8.0"
+gem "pg", "0.8.0", :group=>:production
+gem 'sqlite3-ruby', :require => 'sqlite3'
 
 # http://blog.davidchelimsky.net/2010/07/11/rspec-rails-2-generators-and-rake-tasks/
 group :development, :test do

@@ -1,15 +1,14 @@
 development:
-  adapter: postgresql
-  database: fire_coverage_development
-  host: localhost
-  encoding: utf8
+  adapter: sqlite3
+  database: db/development.sqlite3
+  pool: 5
+  timeout: 5000
 
-test: &TEST
-  adapter: postgresql
-  database: fire_coverage_test
-  host: localhost
-  encoding: utf8
-  min_messages: warning
+test:
+  adapter: sqlite3
+  database: db/test.sqlite3
+  pool: 5
+  timeout: 5000
 
 cucumber:
   <<: *TEST
