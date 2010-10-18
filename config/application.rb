@@ -4,7 +4,7 @@ require 'rails/all'
 
 Bundler.require(:default, Rails.env) if defined?(Bundler)
 
-module CHANGECONST
+module Fire_coverage
   class Application < Rails::Application
     config.time_zone = 'UTC'
     config.encoding  = "utf-8"

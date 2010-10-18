@@ -1,6 +1,6 @@
-HOST = 'CHANGEME.com'
+HOST = 'fire_coverage.com'
 
-CHANGECONST::Application.configure do
+Fire_coverage::Application.configure do
   config.cache_classes               = true
   config.consider_all_requests_local = false
 

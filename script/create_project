@@ -11,8 +11,8 @@ fail("Project directory (#{project_directory}) already exists") if project_direc
 
 local_url     = File.expand_path(File.join(File.dirname(__FILE__), '..'))
 template_url  = "git://github.com/thoughtbot/suspenders.git"
-changeconst   = "CHANGECONST"
-changeme      = "CHANGEME"
+changeconst   = "Fire_coverage"
+changeme      = "fire_coverage"
 changesession = "CHANGESESSION"
 
 def run(cmd)

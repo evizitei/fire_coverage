@@ -1,12 +1,12 @@
 development:
   adapter: postgresql
-  database: CHANGEME_development
+  database: fire_coverage_development
   host: localhost
   encoding: utf8
 
 test: &TEST
   adapter: postgresql
-  database: CHANGEME_test
+  database: fire_coverage_test
   host: localhost
   encoding: utf8
   min_messages: warning
@@ -16,8 +16,8 @@ cucumber:
 
 staging:
   adapter: postgresql
-  database: CHANGEME_development
+  database: fire_coverage_development
 
 production:
   adapter: postgresql
-  database: CHANGEME_development
+  database: fire_coverage_development

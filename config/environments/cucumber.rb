@@ -1,6 +1,6 @@
 HOST = 'www.example.com'
 
-CHANGECONST::Application.configure do
+Fire_coverage::Application.configure do
   config.cache_classes               = true
   config.whiny_nils                  = true
   config.consider_all_requests_local = true
