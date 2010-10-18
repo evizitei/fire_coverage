@@ -11,7 +11,7 @@ gem "paperclip",         "2.3.3"
 gem "will_paginate",     "3.0.pre2"
 gem "heroku"
 
-gem "formtastic", :git => "git://github.com/justinfrench/formtastic.git", :branch => "rails3"
+gem "formtastic", "1.1.0"
 
 gem "pg", "0.8.0", :group=>:production
 gem 'sqlite3-ruby', :require => 'sqlite3'
