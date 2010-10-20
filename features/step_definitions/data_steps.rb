@@ -3,7 +3,7 @@ Given /^there is a district named "([^"]*)"$/ do |name|
 end
 
 Given /^there is a user with email "([^"]*)" and password "([^"]*)" in "([^"]*)"$/ do |email, pass, district|
-  Factory(:user,:email=>email,:password=>pass,:district=>District.find_by_name(district))
+  Factory(:email_confirmed_user,:email=>email,:password=>pass,:password_confirmation=>pass,:district=>District.find_by_name(district))
 end
 
 Given /^there is a station named "([^"]*)" in "([^"]*)"$/ do |name, district|

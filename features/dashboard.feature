@@ -13,7 +13,8 @@ Feature: See overall district status
       And there is a tag for "Josh Creamer" in "Station 1"
       And there is a tag for "Travis Kirsten" in "Station 2"
       And there is a tag for "Victoria Tex" in "Station 3"
-    When I login with "ethan.vizitei@gmail.com" and "bcfdmo"
+    When I sign in as "ethan.vizitei@gmail.com/bcfdmo"
+    Then show me the page
     Then I should see "Station Staffing for BCFPD"
       And I should see "Station 1"
       And I should see "Stephen Dunkin" within ".Station_1"

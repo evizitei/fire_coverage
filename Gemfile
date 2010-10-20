@@ -5,6 +5,7 @@ gem "rack",  "1.2.1"
 
 gem "clearance",         "0.9.0.rc7"
 gem "haml",              "3.0.17"
+gem "slim"
 gem "high_voltage",      "0.9.1"
 gem "hoptoad_notifier",  "2.2.0"
 gem "paperclip",         "2.3.3"
