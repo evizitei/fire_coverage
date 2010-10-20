@@ -11,3 +11,4 @@ tags
 !.keep
 vendor/bundler_gems
 .rvmrc
+capybara*.html
