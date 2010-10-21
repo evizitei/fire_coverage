@@ -11,4 +11,8 @@ class StaffingRecord < ActiveRecord::Base
     self.is_closed ||= false
     self.arrived_at ||= DateTime.now
   end
+  
+  def log_departure!
+    self.update_attributes!(:is_closed=>true,:departed_at=>DateTime.now)
+  end
 end

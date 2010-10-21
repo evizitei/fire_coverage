@@ -29,4 +29,14 @@ describe Station do
       station.staffing_records.current.first.sig == tag.sig
     end
   end
+  
+  describe "when tag departs" do
+    it "closes out an open staffing record" do
+      tag = Factory(:tag)
+      station = Factory(:station)
+      rec = Factory(:open_staffing_record,:tag=>tag,:station=>station)
+      station.tag_departing!(tag.sig)
+      station.staffing_records.current.size.should == 0
+    end
+  end
 end

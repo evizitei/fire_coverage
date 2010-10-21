@@ -8,4 +8,9 @@ class Station < ActiveRecord::Base
       staffing_records.create!(:tag=>tag)
     end
   end
+  
+  def tag_departing!(tag_sig)
+    tag = Tag.find_by_sig(tag_sig)
+    staffing_records.current.where(:tag_id=>tag.id).each {|sr| sr.log_departure! }
+  end
 end

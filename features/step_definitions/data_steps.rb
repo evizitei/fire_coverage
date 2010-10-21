@@ -12,7 +12,7 @@ end
 
 Given /^there is a tag for "([^"]*)" in "([^"]*)"$/ do |name, station|
   tag = Factory(:tag,:name=>name)
-  Factory(:staffing_record,:tag=>tag,:station=>Station.find_by_name(station))
+  Factory(:open_staffing_record,:tag=>tag,:station=>Station.find_by_name(station))
 end
 
 Given /^there is an empty station named "([^"]*)" with an ID of (\d+)$/ do |name, id|

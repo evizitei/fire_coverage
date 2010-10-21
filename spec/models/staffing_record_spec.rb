@@ -38,4 +38,18 @@ describe StaffingRecord do
   it "sets the arrival timestamp at creation" do
     StaffingRecord.new.arrived_at.should_not == nil
   end
+  
+  describe "when logging departure of a tag" do
+    it "sets the closed flag" do
+      rec = Factory(:open_staffing_record)
+      rec.log_departure!
+      rec.is_closed.should == true
+    end
+    
+    it "sets the departed at timestamp" do
+      rec = Factory(:open_staffing_record)
+      rec.log_departure!
+      rec.departed_at.should_not == nil
+    end
+  end
 end
