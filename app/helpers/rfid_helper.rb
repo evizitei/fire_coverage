@@ -1,0 +1,2 @@
+module RfidHelper
+end

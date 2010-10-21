@@ -13,6 +13,12 @@ describe StaffingRecord do
     rec.tag.should == tag
   end
   
+  it "delegates the sig method to the tag" do
+    tag = Factory(:tag)
+    rec = Factory(:staffing_record,:tag=>tag)
+    rec.sig.should == tag.sig
+  end
+  
   it "has a scope for being current" do
     tag = Factory(:tag)
     rec = Factory(:open_staffing_record,:tag=>tag)
@@ -27,5 +33,9 @@ describe StaffingRecord do
   
   it "defaults the closed flag to false" do
     StaffingRecord.new.is_closed.should == false
+  end
+  
+  it "sets the arrival timestamp at creation" do
+    StaffingRecord.new.arrived_at.should_not == nil
   end
 end

@@ -1,4 +1,11 @@
 class Station < ActiveRecord::Base
   belongs_to :district
   has_many :staffing_records
+  
+  def tag_arriving!(tag_sig)
+    tag = Tag.find_by_sig(tag_sig)
+    if staffing_records.current.where(:tag_id=>tag.id).count == 0
+      staffing_records.create!(:tag=>tag)
+    end
+  end
 end

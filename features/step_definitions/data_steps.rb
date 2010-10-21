@@ -14,3 +14,12 @@ Given /^there is a tag for "([^"]*)" in "([^"]*)"$/ do |name, station|
   tag = Factory(:tag,:name=>name)
   Factory(:staffing_record,:tag=>tag,:station=>Station.find_by_name(station))
 end
+
+Given /^there is an empty station named "([^"]*)" with an ID of (\d+)$/ do |name, id|
+  Factory(:station,:name=>name,:id=>id)
+end
+
+Then /^there should be (\d+) member(?:|s) at "([^"]*)"$/ do |count, station_name|
+  station = Station.find_by_name(station_name)
+  station.staffing_records.current.size.should eq(count.to_i)
+end

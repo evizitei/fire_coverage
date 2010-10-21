@@ -22,6 +22,3 @@ Feature: See overall district status
       And I should see "Travis Kirsten" within ".station[data_tag='Station 2']"
       And I should see "Station 3"
       And I should see "Victoria Tex" within ".station[data_tag='Station 3']"
-      
-  
-  

@@ -6,9 +6,13 @@ Factory.define :station do |s|
   s.name "Station 14"
 end
 
+Factory.sequence :tag_sig do |n|
+  "F#{n}k#{n+1}"
+end
+
 Factory.define :tag do |t|
   t.name "Ethan Vizitei"
-  t.sig "N1gi"
+  t.sig { Factory.next :tag_sig }
 end
 
 Factory.define :staffing_record do |s|
@@ -21,3 +25,4 @@ end
 Factory.define :closed_staffing_record,:parent=>:staffing_record do |s|
   s.is_closed true
 end
+
