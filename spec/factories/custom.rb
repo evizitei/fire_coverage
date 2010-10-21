@@ -13,3 +13,11 @@ end
 
 Factory.define :staffing_record do |s|
 end
+
+Factory.define :open_staffing_record,:parent=>:staffing_record do |s|
+  s.is_closed false
+end
+
+Factory.define :closed_staffing_record,:parent=>:staffing_record do |s|
+  s.is_closed true
+end

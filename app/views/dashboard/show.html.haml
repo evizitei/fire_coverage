@@ -1,4 +1,10 @@
 -if current_user.district
   = "Station Staffing for #{current_user.district.name}"
+  -current_user.district.stations.each do |station|
+    .station{:id=>"station_#{station.id}",:data_tag=>station.name}
+      .station_header= station.name
+      .station_staff
+        -station.staffing_records.current.each do |sr|
+          .staff_record= sr.tag.name
 -else
   No district for this user!

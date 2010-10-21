@@ -14,15 +14,14 @@ Feature: See overall district status
       And there is a tag for "Travis Kirsten" in "Station 2"
       And there is a tag for "Victoria Tex" in "Station 3"
     When I sign in as "ethan.vizitei@gmail.com/bcfdmo"
-    Then show me the page
     Then I should see "Station Staffing for BCFPD"
       And I should see "Station 1"
-      And I should see "Stephen Dunkin" within ".Station_1"
-      And I should see "Josh Creamer" within ".Station_1"
+      And I should see "Stephen Dunkin" within ".station[data_tag='Station 1']"
+      And I should see "Josh Creamer" within ".station[data_tag='Station 1']"
       And I should see "Station 2"
-      And I should see "Travis Kirsten" within ".Station_2"
+      And I should see "Travis Kirsten" within ".station[data_tag='Station 2']"
       And I should see "Station 3"
-      And I should see "Victoria Tex" within ".Station_3"
+      And I should see "Victoria Tex" within ".station[data_tag='Station 3']"
       
   
   

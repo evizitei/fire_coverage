@@ -12,4 +12,20 @@ describe StaffingRecord do
     rec = Factory(:staffing_record,:tag=>tag)
     rec.tag.should == tag
   end
+  
+  it "has a scope for being current" do
+    tag = Factory(:tag)
+    rec = Factory(:open_staffing_record,:tag=>tag)
+    StaffingRecord.current.index(rec).should eq(0)
+  end
+  
+  it "doesn't include closed records in the current scope" do
+    tag = Factory(:tag)
+    rec = Factory(:closed_staffing_record,:tag=>tag)
+    StaffingRecord.current.index(rec).should eq(nil)
+  end
+  
+  it "defaults the closed flag to false" do
+    StaffingRecord.new.is_closed.should == false
+  end
 end
