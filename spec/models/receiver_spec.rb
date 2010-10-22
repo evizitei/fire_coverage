@@ -19,6 +19,14 @@ describe Receiver do
     end
     
     describe "when tag arrives" do
+      it "fails loudly when tag sig is null" do
+        lambda{@receiver.tag_arriving!(nil)}.should raise_error(ArgumentError)
+      end
+      
+      it "fails loudly when tag sig is blank" do
+        lambda{@receiver.tag_arriving!("")}.should raise_error(ArgumentError)
+      end
+      
       it "adds a record to the station if one isn't open" do
         @receiver.tag_arriving!(@tag.sig)
         @station.staffing_records.current.size.should == 1
