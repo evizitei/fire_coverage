@@ -1,15 +1,18 @@
-:javascript
-  setTimeout("window.location.reload(true)",5000);
+/:javascript
+/  setTimeout("window.location.reload(true)",5000);
 -if current_user.district
-  %h1= "Station Staffing for #{current_user.district.name}"
+  %h1= "Station Staffing for #{current_user.district.name} as of #{DateTime.now.strftime("%m/%d/%Y %H:%M")}"
   -current_user.district.stations.in_groups_of(4).each do |stations|
     .station_row
       -stations.each do |station|
         .station{:id=>"station_#{station.id}",:data_tag=>station.name}
-          .station_header= station.name
+          %h4.station_header= station.name
           .station_staff
-            -station.staffing_records.current.each do |sr|
-              .staff_record= sr.tag.name
+            -if station.staffing_records.current.size > 0
+              -station.staffing_records.current.each do |sr|
+                .staff_record= sr.tag.name
+            -else
+              .staff_alert STATUS 0
 -else
   No district for this user!
 
@@ -17,16 +20,44 @@
   :sass
     .station_row
       :width 900px
-      :min-height 70px
+      :min-height 130px
+      :margin-bottom 10px
     .station
+      :background #2f2f2f
+      :min-height 130px
+      :-moz-border-radius 10px
+      :-webkit-border-radius 10px
+      :color white
       :border 1px solid black
       :width 200px
       :margin-right 10px
-      :background-color yellow
       :float left
       .station_header
+        :font-size 14px
+        :padding-left 20px
+        :margin-top 10px
         :font-weight bold
-        :font-size 12pt
       .staff_record
-        :background-color #99CCFF
-        :border-bottom 1px dashed black
+        :background #474747
+        :margin-left 10px
+        :padding 1px
+        :padding-left 4px
+        :margin-top 2px
+        :width 170px
+        :height 20px
+        :color white
+        :border none
+        :-moz-border-radius 10px
+        :-webkit-border-radius 10px
+      .staff_alert
+        :margin-left 10px
+        :padding 1px
+        :padding-left 4px
+        :margin-top 2px
+        :width 170px
+        :height 20px
+        :color black
+        :border none
+        :-moz-border-radius 10px
+        :-webkit-border-radius 10px
+        :background red
