@@ -1,5 +1,5 @@
-/:javascript
-/  setTimeout("window.location.reload(true)",5000);
+:javascript
+  setTimeout("window.location.reload(true)",15000);
 -if current_user.district
   %h1= "Station Staffing for #{current_user.district.name} as of #{DateTime.now.strftime("%m/%d/%Y %H:%M")}"
   -current_user.district.stations.in_groups_of(4).each do |stations|
