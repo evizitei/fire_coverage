@@ -9,4 +9,8 @@ describe Tag do
   it "has many staffing_records" do
     Tag.new.staffing_records.should eq([])
   end
+  
+  it "has many receiver_staffing_records" do
+    Tag.new.receiver_staffing_records.should eq([])
+  end
 end

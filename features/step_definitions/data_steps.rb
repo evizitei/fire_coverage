@@ -10,6 +10,11 @@ Given /^there is a station named "([^"]*)" in "([^"]*)"$/ do |name, district|
   Factory(:station,:name=>name,:district=>District.find_by_name(district))
 end
 
+Given /^there is a receiver at "([^"]*)" with an ID of (\d+)$/ do |station_name, receiver_id|
+  station = Station.find_by_name(station_name)
+  Factory(:receiver,:id=>receiver_id,:station=>station)
+end
+
 Given /^there is a tag for "([^"]*)" in "([^"]*)"$/ do |name, station|
   tag = Factory(:tag,:name=>name)
   Factory(:open_staffing_record,:tag=>tag,:station=>Station.find_by_name(station))

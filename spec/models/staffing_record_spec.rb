@@ -13,6 +13,10 @@ describe StaffingRecord do
     rec.tag.should == tag
   end
   
+  it "has many receiver staffing records" do
+    StaffingRecord.new.receiver_staffing_records.should == []
+  end
+  
   it "delegates the sig method to the tag" do
     tag = Factory(:tag)
     rec = Factory(:staffing_record,:tag=>tag)
@@ -50,6 +54,38 @@ describe StaffingRecord do
       rec = Factory(:open_staffing_record)
       rec.log_departure!
       rec.departed_at.should_not == nil
+    end
+  end
+  
+  describe "when checking whether record should still be open" do
+    before(:each) do
+      @rec = Factory(:open_staffing_record)
+    end
+    
+    it "closes out if there are no receiver staffing records" do
+      @rec.update_staffing_status!
+      @rec.is_closed.should == true
+    end
+    
+    it "stays open if there are two receiver staffing records" do
+      Factory(:open_receiver_staffing_record,:staffing_record=>@rec)
+      Factory(:open_receiver_staffing_record,:staffing_record=>@rec)
+      @rec.update_staffing_status!
+      @rec.is_closed.should == false
+    end
+    
+    it "stays open if there is one open and one closed receiver staffing records" do
+      Factory(:closed_receiver_staffing_record,:staffing_record=>@rec)
+      Factory(:open_receiver_staffing_record,:staffing_record=>@rec)
+      @rec.update_staffing_status!
+      @rec.is_closed.should == false
+    end
+    
+    it "closes out if there are 2 closed receiver staffing records" do
+      Factory(:closed_receiver_staffing_record,:staffing_record=>@rec)
+      Factory(:closed_receiver_staffing_record,:staffing_record=>@rec)
+      @rec.update_staffing_status!
+      @rec.is_closed.should == true
     end
   end
 end
