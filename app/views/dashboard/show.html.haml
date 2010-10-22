@@ -2,21 +2,28 @@
   setTimeout("window.location.reload(true)",5000);
 -if current_user.district
   %h1= "Station Staffing for #{current_user.district.name}"
-  -current_user.district.stations.each do |station|
-    .station{:id=>"station_#{station.id}",:data_tag=>station.name}
-      .station_header= station.name
-      .station_staff
-        -station.staffing_records.current.each do |sr|
-          .staff_record= sr.tag.name
+  -current_user.district.stations.in_groups_of(4).each do |stations|
+    .station_row
+      -stations.each do |station|
+        .station{:id=>"station_#{station.id}",:data_tag=>station.name}
+          .station_header= station.name
+          .station_staff
+            -station.staffing_records.current.each do |sr|
+              .staff_record= sr.tag.name
 -else
   No district for this user!
 
 %style
   :sass
+    .station_row
+      :width 900px
+      :min-height 70px
     .station
       :border 1px solid black
       :width 200px
+      :margin-right 10px
       :background-color yellow
+      :float left
       .station_header
         :font-weight bold
         :font-size 12pt
