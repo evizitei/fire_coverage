@@ -1,0 +1,11 @@
+%h1 Sign in
+= semantic_form_for :session, :url => session_path do |form|
+  .input
+    = form.inputs do 
+      = form.input :email , :input_html=>{:class=>"input-row"}
+      = form.input :password, :as => :password , :input_html=>{:class=>"input-row"}
+    %br
+    = form.buttons do 
+      = form.commit_button "Sign in",:button_html=>{:class=>"btn-send"}
+%ul
+  %li= link_to "Forgot password?", new_password_path 

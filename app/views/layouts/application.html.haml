@@ -1,16 +1,56 @@
 !!!
-%html
+%html{:xmlns=>"http://www.w3.org/1999/xhtml"}
   %head 
+    %meta{"http-equiv"=>"Content-Type",:content=>"text/html; charset=utf-8"}
     %title fire_coverage
-    = stylesheet_link_tag 'screen', :media => 'all', :cache => true 
-    = javascript_include_tag "jquery", "jquery-ui", "prefilled_input", "rails", "application", :cache => true
+    = stylesheet_link_tag 'screen',"style","reset-fonts-grids"
     = csrf_meta_tag
   %body
-    #header
-      -if signed_in?
-        = link_to "Sign out", sign_out_path, :method => :delete
-      -else 
-        = link_to "Sign in", sign_in_path
-    = render :partial => 'shared/flashes'
-    = yield
-    = render :partial => 'shared/javascript'
+    #doc3.yui-t6
+      #hd
+        =link_to image_tag("logo.png"),"/",:class=>"logo"
+        .menu
+          %ul
+            -if signed_in?
+              %li=link_to "Home","/"
+              %li=link_to "Sign out",sign_out_path,:method=>:delete
+            -else
+              %li=link_to "Sign in",sign_in_path
+              %li=link_to "Sign up", sign_up_path
+        .breadcrumbs
+        .shadow-below-breadcrumbs
+      #bd	                     
+        .page
+          = render :partial => 'shared/flashes'
+          = yield
+          = javascript_include_tag "jquerytools_min","cufon-yui","eurofurence_500.font","fancybox","scripts"
+    #ft
+      .wrapper
+        .latest-news
+          %h4.footer-title LATEST NEWS
+          %ul
+            %li 
+              &raquo;
+              New clients in Missouri
+            %li
+              &raquo;
+              Now track your apparatus too!
+            %li
+              &raquo;
+              New empty station notifications!
+        .testemonials
+          %h4.footer-title TESTEMONIALS
+          %p{:class=>"testemonial-text"}
+            "This has revolutionized the way we track our station staffing, and for a great price."
+        .subscribers        
+          %h4.footer-title SUBSCRIBERS
+          %ul
+            %li 
+              &raquo;
+              BCFPD
+    .copyright
+      .copyright-wrapper
+        .copyright2010
+          %p.all-right-reserved Copyright 2010.
+          %a{:href=>"#",:id=>"moderna-link"} Box-Alarm Software.
+          %p{:class=>"all-right-reserved"} All Right Reserved.       
