@@ -55,3 +55,23 @@ if defined?(ActiveRecord::Base)
   rescue LoadError => ignore_if_database_cleaner_not_present
   end
 end
+
+module Moonshado
+  class Sms
+    cattr_accessor :sent_messages
+    
+    def deliver_sms
+      raise MoonshadoSMSException.new("Invalid message") unless is_message_valid?(@message)
+
+      data = {:sms => {:device_address => format_number(@number), :message => @message.to_s}}
+
+      self.class.sent_messages ||= []
+      self.class.sent_messages << data
+      response = RestClient::Response.create('{"stat":"ok","id":"sms_id_mock"}', "", {})
+
+      parse(response.to_s)
+    rescue MoonshadoSMSException => exception
+      raise exception
+    end
+  end
+end

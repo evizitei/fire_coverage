@@ -8,15 +8,13 @@ class Station < ActiveRecord::Base
     rec = staffing_records.current.where(:tag_id=>tag.id).first
     (rec.nil? ? staffing_records.create!(:tag=>tag) : rec)
   end
-  # def tag_arriving!(tag_sig)
-  #     tag = Tag.find_by_sig(tag_sig)
-  #     if staffing_records.current.where(:tag_id=>tag.id).count == 0
-  #       staffing_records.create!(:tag=>tag)
-  #     end
-  #   end
-  #   
-  #   def tag_departing!(tag_sig)
-  #     tag = Tag.find_by_sig(tag_sig)
-  #     staffing_records.current.where(:tag_id=>tag.id).each {|sr| sr.log_departure! }
-  #   end
+  
+  def staffing_message
+    recs = self.staffing_records.current
+    if recs.size == 0
+      "#{sms_code}: STATUS 0"
+    else
+      "#{sms_code}: #{recs.map{|r| r.tag.name.split(/\s/).last}.join(",")}"
+    end
+  end
 end

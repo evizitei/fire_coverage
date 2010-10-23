@@ -4,6 +4,7 @@ Fire_coverage::Application.routes.draw do
   match "/" => "dashboard#show"
   match "/rfid/tag_arrived" => "rfid#tag_arrived"
   match "/rfid/tag_departed" => "rfid#tag_departed"
+  match "/sms/mo" => "sms#incoming_sms"
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action

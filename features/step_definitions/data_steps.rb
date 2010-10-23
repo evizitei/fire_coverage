@@ -6,8 +6,16 @@ Given /^there is a user with email "([^"]*)" and password "([^"]*)" in "([^"]*)"
   Factory(:email_confirmed_user,:email=>email,:password=>pass,:password_confirmation=>pass,:district=>District.find_by_name(district))
 end
 
+Given /^there is a user in "([^"]*)" named "([^"]*)" with the phone number "([^"]*)"$/ do |district, name, number|
+ Factory(:email_confirmed_user,:name=>name,:district=>District.find_by_name(district),:phone=>number)
+end
+
 Given /^there is a station named "([^"]*)" in "([^"]*)"$/ do |name, district|
   Factory(:station,:name=>name,:district=>District.find_by_name(district))
+end
+
+Given /^there is a station named "([^"]*)" in "([^"]*)" with "([^"]*)" as their sms code$/ do |name, district, sms_code|
+  Factory(:station,:name=>name,:district=>District.find_by_name(district),:sms_code=>sms_code)
 end
 
 Given /^there is a receiver at "([^"]*)" with an ID of (\d+)$/ do |station_name, receiver_id|
