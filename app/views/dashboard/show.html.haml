@@ -16,8 +16,18 @@
 -else
   No district for this user!
 :javascript
+  var timeout_id;
+  
+  function set_reload_page(){
+    timeout_id = setTimeout("window.location.reload(true);",15000);
+  }
+  
+  function pause_reload(){
+    clearTimeout(timeout_id);
+  }
+  
   $(document).ready(function() {
-    //setTimeout("window.location.reload(true)",15000);
+    set_reload_page();
   	$("a.fancybox").fancybox({
     		'transitionIn'	:	'elastic',
     		'transitionOut'	:	'elastic',
@@ -26,7 +36,9 @@
     		'width' : 530,
     		'height' : 280,
     		'autoScale' : false,
-    		'autoDimensions' : false
+    		'autoDimensions' : false,
+    		'onClosed' : set_reload_page,
+    		'onStart' : pause_reload
     	});
   });
 %style
