@@ -13,7 +13,7 @@ Fire_coverage::Application.configure do
   config.after_initialize do
     Moonshado::Sms.configure do |config|
       config.api_key = ENV['MOONSHADOSMS_URL']
-      config.keywords = {:firec => "http://fire-coverage.heroku.com/sms/mo"}
+      config.keywords = {:staff => "http://fire-coverage.heroku.com/sms/mo"}
       config.auto_register_keywords = true
     end
   end
