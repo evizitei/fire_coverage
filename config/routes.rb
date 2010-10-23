@@ -5,6 +5,7 @@ Fire_coverage::Application.routes.draw do
   match "/dashboard/todays_staffing" => "dashboard#todays_staffing"
   match "/rfid/tag_arrived" => "rfid#tag_arrived"
   match "/rfid/tag_departed" => "rfid#tag_departed"
+  match "/rfid/pulse" => "rfid#pulse"
   match "/sms/mo" => "sms#incoming_sms"
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
