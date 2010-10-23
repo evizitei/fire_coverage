@@ -14,4 +14,10 @@ Fire_coverage::Application.configure do
   config.after_initialize do
     Timecop.travel(Time.now)
   end
+  
+  config.after_initialize do
+    Moonshado::Sms.configure do |config|
+      config.production_environment = false
+    end
+  end
 end

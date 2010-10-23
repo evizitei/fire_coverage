@@ -9,4 +9,10 @@ Fire_coverage::Application.configure do
   config.action_controller.perform_caching   = false
   config.active_support.deprecation          = :log
   config.action_mailer.raise_delivery_errors = false
+  
+  config.after_initialize do
+    Moonshado::Sms.configure do |config|
+      config.production_environment = false
+    end
+  end
 end

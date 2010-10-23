@@ -9,4 +9,12 @@ Fire_coverage::Application.configure do
   config.active_support.deprecation        = :notify
   config.serve_static_assets               = false
   config.i18n.fallbacks                    = true
+  
+  config.after_initialize do
+    Moonshado::Sms.configure do |config|
+      config.api_key = ENV['MOONSHADOSMS_URL']
+      config.keywords = {:firec => "http://fire-coverage.heroku.com/sms/mo"}
+      config.auto_register_keywords = true
+    end
+  end
 end

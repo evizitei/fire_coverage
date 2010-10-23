@@ -11,4 +11,10 @@ Fire_coverage::Application.configure do
   config.active_support.deprecation                 = :stderr
   config.action_mailer.delivery_method              = :test
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+  
+  config.after_initialize do
+    Moonshado::Sms.configure do |config|
+      config.production_environment = false
+    end
+  end
 end

@@ -11,6 +11,7 @@ gem "hoptoad_notifier",  "2.2.0"
 gem "paperclip",         "2.3.3"
 gem "will_paginate",     "3.0.pre2"
 gem "heroku"
+gem "moonshado-sms"
 
 gem "formtastic", "1.1.0"
 
