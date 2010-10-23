@@ -43,6 +43,18 @@ describe StaffingRecord do
     StaffingRecord.new.arrived_at.should_not == nil
   end
   
+  it "can find records from today" do
+    open_record = Factory(:open_staffing_record,:arrived_at=>48.hours.ago)
+    current_record = Factory(:open_staffing_record)
+    closed_yesterday_record = Factory(:closed_staffing_record,:arrived_at=>48.hours.ago,:departed_at=>36.hour.ago)
+    closed_today_record = Factory(:closed_staffing_record,:arrived_at=>48.hours.ago,:departed_at=>DateTime.now)
+    recs = StaffingRecord.for_today
+    recs.index(open_record).should_not == nil
+    recs.index(current_record).should_not == nil
+    recs.index(closed_today_record).should_not == nil
+    recs.index(closed_yesterday_record).should == nil
+  end
+  
   describe "when logging departure of a tag" do
     it "sets the closed flag" do
       rec = Factory(:open_staffing_record)

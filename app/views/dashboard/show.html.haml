@@ -1,5 +1,3 @@
-:javascript
-  setTimeout("window.location.reload(true)",15000);
 -if current_user.district
   %h1= "Station Staffing for #{current_user.district.name} as of #{DateTime.now.strftime("%m/%d/%Y %H:%M")}"
   -current_user.district.stations.in_groups_of(4).each do |stations|
@@ -7,7 +5,8 @@
       -stations.each do |station|
         -if station
           .station{:id=>"station_#{station.id}",:data_tag=>station.name}
-            %h4.station_header= station.name
+            %a{:href=>"/dashboard/todays_staffing?station=#{station.id}",:class=>"fancybox"}
+              %h4.station_header= station.name
             .station_staff
               -if station.staffing_records.current.size > 0
                 -station.staffing_records.current.each do |sr|
@@ -16,9 +15,25 @@
                 .staff_alert STATUS 0
 -else
   No district for this user!
-
+:javascript
+  $(document).ready(function() {
+    //setTimeout("window.location.reload(true)",15000);
+  	$("a.fancybox").fancybox({
+    		'transitionIn'	:	'elastic',
+    		'transitionOut'	:	'elastic',
+    		'speedIn'		:	900, 
+    		'speedOut'		:	900, 
+    		'width' : 530,
+    		'height' : 280,
+    		'autoScale' : false,
+    		'autoDimensions' : false
+    	});
+  });
 %style
   :sass
+    a.fancybox
+      :color white
+      :text-decoration none
     .station_row
       :width 900px
       :min-height 130px

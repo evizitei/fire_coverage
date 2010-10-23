@@ -6,6 +6,7 @@ class StaffingRecord < ActiveRecord::Base
   delegate :sig, :to => :tag  
   
   scope :current,where(:is_closed=>false)
+  scope :for_today,where(["(is_closed = ?) or (departed_at >= ?)",false,DateTime.parse("#{Date.today.to_s} 1:00 AM")])
   
   def initialize(params={})
     super(params)

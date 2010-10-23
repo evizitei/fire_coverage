@@ -1,0 +1,62 @@
+.staffing_box
+  %h3== Todays Staffing for #{@station.name}
+  .staffing_table
+    %table
+      %thead
+        %tr
+          %th Name
+          %th Arrived
+          %th Departed
+      %tbody
+        -@recs.each do |rec|
+          %tr
+            %td
+              %strong= rec.tag.name
+            %td
+              %span= rec.arrived_at.strftime("%m/%d/%Y -- %H:%M")
+            %td
+              %span= (rec.departed_at ? rec.departed_at.strftime("%m/%d/%Y %H:%M") : "----")
+%style
+  :sass
+    .staffing_box
+      :width 500px
+      :min-height 250px
+      :margin 10px
+      :padding 3px
+      :-moz-border-radius 10px 10px 10px 10px
+      :background-color #C0C0C0
+      h3
+        :color #404040
+        :font-size 1.3em
+      table
+        :width 100%
+        :height 100%
+        thead
+          :border-bottom 1px solid #ABABAB
+          :height 25px
+          th
+            :padding 18px 0
+            :text-transform uppercase
+            :font-size 100%
+            :font-weight bold
+            :text-align center
+        tbody
+          :height 140px
+          :overflow-y auto
+          tr
+            :border-bottom 1px solid #E0E0E0
+            :background #FFFFFF
+            :line-height 12px
+            :height 28px
+            td
+              :font-family Arial,"Helvetica Neue",Helvetica,sans-serif
+              span
+                :-moz-border-radius 6px 6px 6px 6px
+                :background none repeat scroll 0 0 #CFCFCF
+                :color #FFFFFF
+                :padding 3px 5px
+    table tbody tr:first-child 
+      :background url("/images/table_shade.png") repeat-x scroll left top #FFFFFF
+      
+        
+      

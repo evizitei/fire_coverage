@@ -3,7 +3,7 @@
   %head 
     %meta{"http-equiv"=>"Content-Type",:content=>"text/html; charset=utf-8"}
     %title fire_coverage
-    = stylesheet_link_tag 'screen',"style","reset-fonts-grids"
+    = stylesheet_link_tag 'screen',"style","reset-fonts-grids","fancybox"
     = csrf_meta_tag
   %body
     #doc3.yui-t6
@@ -22,8 +22,8 @@
       #bd	                     
         .page
           = render :partial => 'shared/flashes'
+          = javascript_include_tag "jquerytools_min","cufon-yui","eurofurence_500.font","fancybox","easing","scripts"
           = yield
-          = javascript_include_tag "jquerytools_min","cufon-yui","eurofurence_500.font","fancybox","scripts"
     #ft
       .wrapper
         .latest-news

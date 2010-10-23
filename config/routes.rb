@@ -2,6 +2,7 @@ Fire_coverage::Application.routes.draw do
   # The priority is based upon order of creation:
   # first created -> highest priority.
   match "/" => "dashboard#show"
+  match "/dashboard/todays_staffing" => "dashboard#todays_staffing"
   match "/rfid/tag_arrived" => "rfid#tag_arrived"
   match "/rfid/tag_departed" => "rfid#tag_departed"
   match "/sms/mo" => "sms#incoming_sms"

@@ -22,3 +22,15 @@ Feature: See overall district status
       And I should see "Travis Kirsten" within ".station[data_tag='Station 2']"
       And I should see "Station 3"
       And I should see "Victoria Tex" within ".station[data_tag='Station 3']"
+  
+  @javascript
+  Scenario: Looking at today's staffing details
+    Given there is a district named "BCFPD"
+      And there is a user with email "ethan.vizitei@gmail.com" and password "bcfdmo" in "BCFPD"
+      And there is a station named "Station 1" in "BCFPD"
+      And there is a tag for "Stephen Dunkin" in "Station 1"
+      And there is a tag for "Josh Creamer" in "Station 1"
+    When I sign in as "ethan.vizitei@gmail.com/bcfdmo"
+    Then I should see "Station Staffing for BCFPD"
+    When I follow "Station 1"
+    Then I should see "Todays Staffing for Station 1"
