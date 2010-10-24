@@ -13,4 +13,8 @@ describe Tag do
   it "has many receiver_staffing_records" do
     Tag.new.receiver_staffing_records.should eq([])
   end
+  
+  it "belongs to a district" do
+    Tag.new.district.should == nil
+  end
 end

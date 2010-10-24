@@ -7,6 +7,23 @@ describe Receiver do
     receiver.station.should == station
   end
   
+  it "belongs to a district" do
+    district = Factory(:district)
+    receiver = Factory(:receiver,:district=>district)
+    receiver.district.should == district
+  end
+  
+  it "should update the district when the station changes" do
+    district = Factory(:district)
+    station = Factory(:station,:district=>district)
+    receiver = Factory(:receiver)
+    receiver.station = station
+    receiver.save
+    receiver.reload
+    receiver.station.should == station
+    receiver.district.should == district
+  end
+  
   it "has many staffing records" do
     Receiver.new.receiver_staffing_records.should == []
   end

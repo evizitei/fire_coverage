@@ -1,5 +1,6 @@
 class Receiver < ActiveRecord::Base
   belongs_to :station
+  belongs_to :district
   has_many :receiver_staffing_records
   
   def tag_arriving!(tag_sig)
