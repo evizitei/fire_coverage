@@ -264,7 +264,8 @@ body {
   border-left: 5px solid #78c8c8;
   border-right: 5px solid #78c8c8;
   -moz-border-radius: 5px;
-  -webkit-border-radius: 5px; }
+  -webkit-border-radius: 5px;
+  border-radius: 5px; }
 
 .scrollable-area {
   position: relative;
@@ -562,6 +563,7 @@ body {
   height: 36px;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
+  border-radius: 5px;
   cursor: pointer;
   outline: none;
   text-decoration: none;
@@ -638,6 +640,7 @@ body {
   float: left;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
+  border-radius: 5px;
   border: none;
   color: #444444;
   margin-top: 20px;
