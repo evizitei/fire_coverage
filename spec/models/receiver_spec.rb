@@ -28,10 +28,60 @@ describe Receiver do
     Receiver.new.receiver_staffing_records.should == []
   end
   
+  describe "the pulse monitoring function:" do
+    before(:each) do
+      @district = Factory(:district)
+      @tag = Factory(:tag,:district=>@district)
+      @station = Factory(:station,:district=>@district)
+      @receiver = Factory(:receiver,:station=>@station,:last_updated_at=>2.days.ago)
+    end
+    
+    it "populates the pulse field at creation" do
+      cur_time = DateTime.now
+      Timecop.freeze(DateTime.now)
+      Receiver.new.last_updated_at.should == cur_time
+      Timecop.return
+    end
+  
+    it "pulses when tag arrives" do
+      now = DateTime.now
+      Timecop.freeze(now)
+      @receiver.tag_arriving!(@tag.sig)
+      @receiver.last_updated_at.strftime("%H:%I:%S").should eq(now.strftime("%H:%I:%S"))
+      Timecop.return
+    end
+  
+    it "pulses when tag departs" do
+      now = DateTime.now
+      Timecop.freeze(now)
+      @receiver.tag_departing!(@tag.sig)
+      @receiver.last_updated_at.strftime("%H:%I:%S").should eq(now.strftime("%H:%I:%S"))
+      Timecop.return
+    end
+  
+    it "registers regular checkin intervals" do
+      some_time = 5.hours.ago
+      rec = Receiver.new
+      Timecop.freeze(some_time)
+      @receiver.pulse!
+      @receiver.last_updated_at.strftime("%H:%I:%S").should eq(some_time.strftime("%H:%I:%S"))
+      Timecop.return
+    end
+    
+    it "cannot register another district's tag" do
+      @tag.district=Factory(:district)
+      @tag.save!
+      lambda{@receiver.tag_arriving!(@tag.sig)}.should raise_error(ArgumentError)
+    end
+  end
+  
+  
+  
   describe "tag traffic: " do
     before(:each) do
-      @tag = Factory(:tag)
-      @station = Factory(:station)
+      @district = Factory(:district)
+      @tag = Factory(:tag,:district=>@district)
+      @station = Factory(:station,:district=>@district)
       @receiver = Factory(:receiver,:station=>@station)
     end
     
