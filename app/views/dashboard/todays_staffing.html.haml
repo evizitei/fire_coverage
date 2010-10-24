@@ -15,7 +15,7 @@
             %td
               %span= rec.arrived_at.strftime("%m/%d/%Y -- %H:%M")
             %td
-              %span= (rec.departed_at ? rec.departed_at.strftime("%m/%d/%Y %H:%M") : "----")
+              %span= (rec.departed_at ? rec.departed_at.strftime("%m/%d/%Y -- %H:%M") : "----")
 %style
   :sass
     .staffing_box

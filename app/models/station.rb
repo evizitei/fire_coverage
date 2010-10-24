@@ -1,12 +1,18 @@
 class Station < ActiveRecord::Base
   belongs_to :district
-  has_many :staffing_records
-  has_many :receivers
+  has_many :staffing_records,:dependent=>:destroy
+  has_many :receivers,:dependent=>:destroy
   
   def fetch_open_staffing_record(tag_sig)
     tag = Tag.find_by_sig(tag_sig)
     rec = staffing_records.current.where(:tag_id=>tag.id).first
-    (rec.nil? ? staffing_records.create!(:tag=>tag) : rec)
+    return rec if rec
+    rec = staffing_records.where(["tag_id = ? and departed_at >= ?",tag.id,3.minutes.ago]).first
+    if rec
+      rec.reopen!
+      return rec
+    end
+    staffing_records.create!(:tag=>tag)
   end
   
   def staffing_message

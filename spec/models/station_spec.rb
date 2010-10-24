@@ -20,12 +20,37 @@ describe Station do
   end
   
   describe "when fetching a staffing record" do
+    before(:each) do
+      @station = Factory(:station)
+      @tag = Factory(:tag)
+    end
+    
     it "will create a new staffing record if one doesn't exist" do
-      station = Factory(:station)
-      tag = Factory(:tag)
-      rec = station.fetch_open_staffing_record(tag.sig)
-      station.staffing_records.current.size.should == 1
-      station.staffing_records.current.first.sig.should == tag.sig
+      rec = @station.fetch_open_staffing_record(@tag.sig)
+      @station.staffing_records.current.size.should == 1
+      @station.staffing_records.current.first.sig.should == @tag.sig
+    end
+    
+    it "will reuse one that was closed within the last 3 minutes" do
+      Timecop.freeze(Time.now)
+      closed_time = 175.seconds.ago
+      closed_rec = Factory(:closed_staffing_record,:tag=>@tag,:station=>@station,
+                             :arrived_at=>1.hour.ago,:departed_at=>closed_time)
+      rec = @station.fetch_open_staffing_record(@tag.sig)
+      @station.staffing_records.current.size.should == 1
+      @station.staffing_records.current.first.id.should == closed_rec.id
+      Timecop.return
+    end
+    
+    it "will not reuse one that was closed outside the last 3 minutes" do
+      Timecop.freeze(Time.now)
+      closed_time = 185.seconds.ago
+      closed_rec = Factory(:closed_staffing_record,:tag=>@tag,:station=>@station,
+                             :arrived_at=>1.hour.ago,:departed_at=>closed_time)
+      rec = @station.fetch_open_staffing_record(@tag.sig)
+      @station.staffing_records.current.size.should == 1
+      @station.staffing_records.current.first.id.should_not == closed_rec.id
+      Timecop.return
     end
   end
   

@@ -39,6 +39,13 @@ describe StaffingRecord do
     StaffingRecord.new.is_closed.should == false
   end
   
+  it "can be reopened after being closed" do
+    rec = Factory(:closed_staffing_record)
+    rec.reopen!
+    rec.is_closed.should == false
+    rec.departed_at.should == nil
+  end
+  
   it "sets the arrival timestamp at creation" do
     StaffingRecord.new.arrived_at.should_not == nil
   end

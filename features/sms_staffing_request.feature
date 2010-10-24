@@ -12,7 +12,7 @@ Feature: Request staffing for a station from the website
      And there is a station named "Station 1" in "BCFPD" with "1" as their sms code
      And there is a tag for "Stephen Dunkin" in "Station 1"
      And there is a tag for "Josh Creamer" in "Station 1"
-     And there is a station named "Station 1" in "BCFPD" with "2" as their sms code
+     And there is a station named "Station 2" in "BCFPD" with "2" as their sms code
      And there is a station named "Training Center" in "BCFPD" with "TC" as their sms code
      And there is a tag for "Chuck Leake" in "Training Center"
      And there is a user in "BCFPD" named "Ethan Vizitei" with the phone number "15732395840" 

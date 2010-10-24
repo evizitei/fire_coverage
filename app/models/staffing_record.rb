@@ -18,6 +18,10 @@ class StaffingRecord < ActiveRecord::Base
     self.update_attributes!(:is_closed=>true,:departed_at=>DateTime.now)
   end
   
+  def reopen!
+    self.update_attributes!(:is_closed=>false,:departed_at=>nil)
+  end
+  
   def update_staffing_status!
     if self.receiver_staffing_records.current.size == 0
       self.log_departure!
